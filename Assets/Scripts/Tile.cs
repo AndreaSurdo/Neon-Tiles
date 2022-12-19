@@ -5,24 +5,17 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {   public float speed;
     Rigidbody rb;
-    public Material Original;
-    public Material CurrentMaterial;
     public GameObject ground;     
     public Material redmat;
     public Material greenmat;
     public Material yellowmat;
     public Material bluemat;
-    public string[] materialTags= new string[]{"red","green","yellow","blue"};
-    private string currentColor;
     public static bool isDead=false;
     public static float distance;
     public GameObject finishLine;
     int pick;
-    public bool letSlow=true;
-    public static bool colorhasChanged=false;
-    public float timer = 0;
-    //public GameObject GameOverUI;
-    //public GameObject PauseButton;
+    public static bool canBeImmortal=true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -68,54 +61,13 @@ public class Tile : MonoBehaviour
         
     }
 
-       public void SlowDownTime()
-    {
-        if(PauseMenu.gameisover){Time.timeScale=0;}
-       /* else
-        {
-            Time.timeScale = 0.5f;
-            Invoke("ResetTimeScale", 0.5f);
-        }*/
-       else
-       { 
-            Time.timeScale = 0.5f;
-            timer += Time.deltaTime;
-                if (timer >= 1)
-                {
-                    Time.timeScale = 1;
-                    timer = 0;
-                }
-       }
-    }
-
-    public void ResetTimeScale()
-    {
-        Time.timeScale = 1f;
-    }
-
-    public void IsSlowTriggered()
-    {
-        if(distance<=5)
-        {
-            if(GameManager.colorChanged==true)
-            {
-                if(letSlow)
-                {
-                    SlowDownTime();
-                }
-                letSlow=false;
-                GameManager.colorChanged=false;
-            }
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {   
         DistanceCalculator();
         if(distance<3)
         {
-            if(colorhasChanged==true)
+            if(GameManager.colorChanged==true)
             {
                 Collider collider = gameObject.GetComponent<Collider>();      
                 Destroy(collider);

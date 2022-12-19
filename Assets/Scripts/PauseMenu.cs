@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 
 public class PauseMenu : MonoBehaviour
@@ -20,6 +21,11 @@ public class PauseMenu : MonoBehaviour
        Time.timeScale=1;
        gameispaused=false;
         
+    }
+
+    public void GetLeaderBoard(){
+        PlayfabManager instance= new PlayfabManager();
+        instance.GetLeaderboard();
     }
 
     public void Replay()
@@ -56,7 +62,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -85,6 +91,10 @@ public class PauseMenu : MonoBehaviour
             GameOverUI.SetActive(true);
             PauseButton.SetActive(false);
             Time.timeScale=0;
+            int scoreint=Convert.ToInt32(GameManager.score);
+            PlayfabManager instance= new PlayfabManager();
+            instance.SendLeaderboard(scoreint);
+                        
         }
     }
 }

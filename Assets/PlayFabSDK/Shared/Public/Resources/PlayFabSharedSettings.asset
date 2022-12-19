@@ -15,7 +15,7 @@ MonoBehaviour:
   TitleId: 80BAA
   DeveloperSecretKey: BB5PPXGS5HOQXI7OU7NHRH5CIME63HOB6JT6YYQAST667RCKAI
   ProductionEnvironmentUrl: 
-  RequestType: 2
+  RequestType: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000

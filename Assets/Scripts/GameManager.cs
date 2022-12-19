@@ -45,8 +45,7 @@ public class GameManager : MonoBehaviour
     {
         PauseMenu.gameisover=false;
         UpdateHighScoreText();
-        GameStart();
- 
+        GameStart(); 
     }  
 
 
@@ -56,13 +55,16 @@ public class GameManager : MonoBehaviour
        //DistanceCalculator();
        ScoreUp();
        SpeedUp();
+       Debug.Log(timer);
        timer += Time.deltaTime;
-                if (timer >= 1.5f)
-                {
-                    Time.timeScale = 1;
-                    timer = 0;
-                    Tile.colorhasChanged=false;
-                }
+       if (timer >= 1f){
+        colorChanged=false;
+        if (timer >= 3f){
+            Time.timeScale = 1;
+            timer = 0; 
+            }           
+                  
+        }
     }
 
 
@@ -137,10 +139,13 @@ public class GameManager : MonoBehaviour
                 currentLightColor="yellow";
             }
             //colorChanged=true;
-            Tile.colorhasChanged=true;
+            colorChanged=true;
             if(before!=after){
-            Time.timeScale=0.5f;
+                timer=0;
+                Time.timeScale=0.5f;
             }
+            
+            
             
         }
     }
