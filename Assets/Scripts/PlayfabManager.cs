@@ -20,6 +20,8 @@ public class PlayfabManager : MonoBehaviour
     public GameObject RegisterTrue;
     public GameObject ResetLink;
     public GameObject ResetTrue;
+    public GameObject rowPrefab;
+    public Transform rowsParent;
 
 
 
@@ -35,7 +37,7 @@ public class PlayfabManager : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
     }   
 
-    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result){
+    public void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result){
         Debug.Log("Leaderboard Updated");
     }
 
@@ -44,8 +46,25 @@ public class PlayfabManager : MonoBehaviour
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet,OnError);
     }
 
-    void OnLeaderboardGet(GetLeaderboardResult result){
+    public void ClearTable(){
+        var clones=GameObject.FindGameObjectsWithTag ("clone");
+         foreach (var clone in clones)
+        {
+            Destroy(clone);
+        }
+
+    }
+
+    public void OnLeaderboardGet(GetLeaderboardResult result){
+        ClearTable();
         foreach(var item in result.Leaderboard){
+            GameObject newGo=Instantiate(rowPrefab, rowsParent);
+            newGo.tag="clone";
+            TextMeshProUGUI[] texts;
+            texts= newGo.GetComponentsInChildren<TextMeshProUGUI>();
+            texts[0].text= item.Position.ToString();
+            texts[1].text= item.PlayFabId;
+            texts[2].text= item.StatValue.ToString();
             Debug.Log(item.Position+""+item.PlayFabId+""+item.StatValue);
         }
     }

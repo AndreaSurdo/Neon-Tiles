@@ -25,8 +25,7 @@ public class Tile : MonoBehaviour
         //GameOverUI=GameObject.Find("Game Over");
         //PauseButton=GameObject.Find("Pause");
         //Debug.Log(ground.tag);
-        RandomColor(); 
-        
+        RandomColor();        
         
     }
     

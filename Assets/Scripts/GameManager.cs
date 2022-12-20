@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
        //DistanceCalculator();
        ScoreUp();
        SpeedUp();
-       Debug.Log(timer);
        timer += Time.deltaTime;
        if (timer >= 1f){
         colorChanged=false;

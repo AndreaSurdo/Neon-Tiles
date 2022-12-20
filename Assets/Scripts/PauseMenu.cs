@@ -14,6 +14,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseUI;
     public GameObject GameOverUI;
     public GameObject PauseButton;
+
+    
     public void Resume()
     {
        PauseUI.SetActive(false);
@@ -92,7 +94,7 @@ public class PauseMenu : MonoBehaviour
             PauseButton.SetActive(false);
             Time.timeScale=0;
             int scoreint=Convert.ToInt32(GameManager.score);
-            PlayfabManager instance= new PlayfabManager();
+            PlayfabManager instance= gameObject.AddComponent<PlayfabManager>();
             instance.SendLeaderboard(scoreint);
                         
         }
