@@ -14,20 +14,17 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseUI;
     public GameObject GameOverUI;
     public GameObject PauseButton;
+    public GameObject LeaderboardMenu;
 
     
     public void Resume()
     {
        PauseUI.SetActive(false);
        PauseButton.SetActive(true);
+       LeaderboardMenu.SetActive(false);
        Time.timeScale=1;
        gameispaused=false;
         
-    }
-
-    public void GetLeaderBoard(){
-        PlayfabManager instance= new PlayfabManager();
-        instance.GetLeaderboard();
     }
 
     public void Replay()
@@ -78,13 +75,16 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                if(!PauseUI.activeSelf){
-                SceneManager.LoadScene("NeonLoginPage");
+                if(LeaderboardMenu.activeSelf){
+                    LeaderboardMenu.SetActive(false);
                 }
-                else
-                {
+                else if(PauseUI.activeSelf){
                     Resume();
                 }
+                else if(!PauseUI.activeSelf){
+                    SceneManager.LoadScene("NeonLoginPage");
+                }
+                
             }
         }
 
@@ -98,5 +98,7 @@ public class PauseMenu : MonoBehaviour
             instance.SendLeaderboard(scoreint);
                         
         }
+        
     }
+    
 }

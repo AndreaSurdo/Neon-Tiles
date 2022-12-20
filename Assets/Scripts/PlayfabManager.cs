@@ -14,6 +14,8 @@ public class PlayfabManager : MonoBehaviour
     public TextMeshProUGUI messageText;
     public TMP_InputField emailinput;
     public TMP_InputField passwordinput;
+    public TMP_InputField usernameinput;
+    public GameObject usernameVisible;
     public GameObject passwordvisible;
     public GameObject Login;
     public GameObject RegisterLink;
@@ -22,6 +24,7 @@ public class PlayfabManager : MonoBehaviour
     public GameObject ResetTrue;
     public GameObject rowPrefab;
     public Transform rowsParent;
+    public GameObject LeaderboardMenu;
 
 
 
@@ -42,6 +45,7 @@ public class PlayfabManager : MonoBehaviour
     }
 
     public void GetLeaderboard(){
+        LeaderboardMenu.SetActive(true);
         var request= new GetLeaderboardRequest{StatisticName="Neon-Tiles-Leaderboard", StartPosition=0, MaxResultsCount=10};
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet,OnError);
     }
@@ -63,7 +67,8 @@ public class PlayfabManager : MonoBehaviour
             TextMeshProUGUI[] texts;
             texts= newGo.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text= item.Position.ToString();
-            texts[1].text= item.PlayFabId;
+            if(item.DisplayName==null){texts[1].text="NULL";}
+            else{texts[1].text= item.DisplayName;}
             texts[2].text= item.StatValue.ToString();
             Debug.Log(item.Position+""+item.PlayFabId+""+item.StatValue);
         }
@@ -81,9 +86,14 @@ public class PlayfabManager : MonoBehaviour
         {
             Email=emailinput.text,
             Password= passwordinput.text,
-            RequireBothUsernameAndEmail=false        
+            Username= usernameinput.text,
+            RequireBothUsernameAndEmail=true        
         };
         PlayFabClientAPI.RegisterPlayFabUser(request,OnRregisterSuccess, OnError);
+    }
+
+    void OnUpdateSuccess(UpdateUserTitleDisplayNameResult result){
+        messageText.text="Username Registered Correctly";
     }
 
     public void RegisterLinkMethod()
@@ -92,6 +102,7 @@ public class PlayfabManager : MonoBehaviour
         RegisterLink.SetActive(false);
         ResetLink.SetActive(false);
         RegisterTrue.SetActive(true);
+        usernameVisible.SetActive(true);
     }
 
     public void ResetLinkMethod()
@@ -111,7 +122,11 @@ public class PlayfabManager : MonoBehaviour
 
     void OnRregisterSuccess (RegisterPlayFabUserResult result)
     {
+        
         messageText.text="Registered and Logged in";
+        UpdateUserTitleDisplayNameRequest request2 = new UpdateUserTitleDisplayNameRequest();
+        request2.DisplayName = usernameinput.text;
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request2,OnUpdateSuccess, OnError);
         SceneManager.LoadScene("Game");
     }
 
@@ -171,6 +186,8 @@ public class PlayfabManager : MonoBehaviour
             RegisterTrue.SetActive(false);
             ResetTrue.SetActive(false);
             passwordvisible.SetActive(true);
+            usernameVisible.SetActive(false);
+            LeaderboardMenu.SetActive(false);
         }
             
     }

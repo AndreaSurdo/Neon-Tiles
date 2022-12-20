@@ -10,6 +10,7 @@ TagManager:
   - red
   - yellow
   - green
+  - clone
   layers:
   - Default
   - TransparentFX
