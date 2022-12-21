@@ -82,6 +82,7 @@ public class PauseMenu : MonoBehaviour
                     Resume();
                 }
                 else if(!PauseUI.activeSelf){
+                    Replay();
                     SceneManager.LoadScene("NeonLoginPage");
                 }
                 

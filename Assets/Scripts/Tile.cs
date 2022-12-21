@@ -84,7 +84,7 @@ public class Tile : MonoBehaviour
              RaycastHit hit;
          if( Physics.Raycast(ray, out hit, 100.0f) && hit.transform.gameObject != null )
         {
-            if(hit.transform.tag!=ground.tag && hit.transform.tag!="finishline" && PauseMenu.gameisover!=true){
+            if(hit.transform.tag!=ground.tag && hit.transform.tag!="finishline" && PauseMenu.gameisover==false && PauseMenu.gameispaused==false){
                 isDead=true;
                 GameObject.Destroy(hit.transform.gameObject);          
                 }

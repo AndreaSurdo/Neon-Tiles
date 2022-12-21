@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
        timer += Time.deltaTime;
        if (timer >= 1f){
         colorChanged=false;
-        if (timer >= 3f){
+        if (timer >= 1.5f){
             Time.timeScale = 1;
             timer = 0; 
             }           
