@@ -19,11 +19,13 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     public Light[] lights;
     //public Color[] colors= new Color[] {Color.red,Color.blue,Color.green,Color.yellow};
-    public int highscore;
+    public static int highscore;
+    public int highscoreBELLO=highscore;
     public float distance;
     public static bool colorChanged=false;
     public float timer = 0;
     public float waitTime;
+    public static string displayName;
     
     //public GameObject playButton;
     //public Button pauseButton;
@@ -44,7 +46,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PauseMenu.gameisover=false;
-        UpdateHighScoreText();
+        //UpdateHighScoreText();
+        PlayfabManager instance= gameObject.AddComponent<PlayfabManager>();
+        instance.GetDisplayName();
         GameStart(); 
     }  
 
@@ -148,7 +152,6 @@ public class GameManager : MonoBehaviour
             
         }
     }
-
     
     /*public void PauseVisible(){
         pauseButton.gameObject.SetActive(true);
@@ -163,13 +166,13 @@ public class GameManager : MonoBehaviour
         
 
     }*/
-    
-
     public void GameStart()
     {    
         StartCoroutine("SpawnObstacles");
         StartCoroutine("ChangeGroundColor");
     }
+
+    
 
     public void SpeedUp(){
         if(score>=10){
@@ -203,13 +206,14 @@ public class GameManager : MonoBehaviour
         if(Tile.isDead){
             Tile.isDead=false;
             score++;
-            CheckHighScore();
+            UpdateHighScoreTextPlayFab();
             scoreText.text=score.ToString();
         }
                     
     }
 
-    public void CheckHighScore()
+    //works only without the global leaderboard
+   /* public void CheckHighScore()
     {
         if(score>PlayerPrefs.GetInt("HighScore",0))
         {
@@ -221,7 +225,13 @@ public class GameManager : MonoBehaviour
     public void UpdateHighScoreText()
     {
         highScoreText.text=$"{PlayerPrefs.GetInt("HighScore",0)}"; 
-    }
+    }*/
 
+    public void UpdateHighScoreTextPlayFab(){
+        PlayfabManager instance2= gameObject.AddComponent<PlayfabManager>();
+        instance2.GetHighScore(displayName);
+        highScoreText.text=highscoreBELLO.ToString();
+
+    }
     
 }

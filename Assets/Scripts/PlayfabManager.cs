@@ -44,11 +44,48 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log("Leaderboard Updated");
     }
 
+    //Leaderboard request for 5 elements
     public void GetLeaderboard(){
         LeaderboardMenu.SetActive(true);
-        var request= new GetLeaderboardRequest{StatisticName="Neon-Tiles-Leaderboard", StartPosition=0, MaxResultsCount=10};
+        var request= new GetLeaderboardRequest{StatisticName="Neon-Tiles-Leaderboard", StartPosition=0, MaxResultsCount=5};
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet,OnError);
     }
+
+    //Get display name to be used by gamemanager
+    public void GetDisplayName()
+{
+    var request = new GetPlayerProfileRequest();
+    PlayFabClientAPI.GetPlayerProfile(request, OnGetPlayerProfileSuccess, OnError);
+}
+
+public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
+{
+    if(result==null){GameManager.displayName="NULL";}
+    GameManager.displayName= result.PlayerProfile.DisplayName;
+}
+
+    //Get highscore from playfab
+    public void GetHighScore(string userId){
+     // Set up the request object
+        GetLeaderboardAroundPlayerRequest request = new GetLeaderboardAroundPlayerRequest
+        {
+            StatisticName = "Neon-Tiles-Leaderboard",
+            MaxResultsCount = 1,
+            PlayFabId = userId
+        };
+
+        // Send the request to PlayFab
+        PlayFabClientAPI.GetLeaderboardAroundPlayer(request, (result) =>
+        {
+            // Check if the player is in the leaderboard
+            if (result.Leaderboard.Count > 0)
+            {
+                // Get the player's score
+                GameManager.highscore = result.Leaderboard[0].StatValue;
+            }
+        }, OnError);
+    }
+    
 
     public void ClearTable(){
         var clones=GameObject.FindGameObjectsWithTag ("clone");
@@ -66,7 +103,7 @@ public class PlayfabManager : MonoBehaviour
             newGo.tag="clone";
             TextMeshProUGUI[] texts;
             texts= newGo.GetComponentsInChildren<TextMeshProUGUI>();
-            texts[0].text= item.Position.ToString();
+            texts[0].text= (item.Position.ToString())+1;
             if(item.DisplayName==null){texts[1].text="NULL";}
             else{texts[1].text= item.DisplayName;}
             texts[2].text= item.StatValue.ToString();
@@ -137,12 +174,17 @@ public class PlayfabManager : MonoBehaviour
         {
             Email=emailinput.text,
             Password=passwordinput.text,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
         };
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
     }
 
     void OnLoginSuccess(LoginResult result)
     {
+        if (result.InfoResultPayload.PlayerProfile != null)
+        {
+            GameManager.displayName = result.InfoResultPayload.PlayerProfile.DisplayName;
+        }
         messageText.text="Logged in";
         SceneManager.LoadScene("Game");
     }
