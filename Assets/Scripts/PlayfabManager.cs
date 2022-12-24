@@ -25,6 +25,7 @@ public class PlayfabManager : MonoBehaviour
     public GameObject rowPrefab;
     public Transform rowsParent;
     public GameObject LeaderboardMenu;
+    public GameObject Pausemenu;
 
 
 
@@ -47,6 +48,7 @@ public class PlayfabManager : MonoBehaviour
     //Leaderboard request for 5 elements
     public void GetLeaderboard(){
         LeaderboardMenu.SetActive(true);
+        Pausemenu.SetActive(false);
         var request= new GetLeaderboardRequest{StatisticName="Neon-Tiles-Leaderboard", StartPosition=0, MaxResultsCount=5};
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet,OnError);
     }
@@ -103,7 +105,8 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
             newGo.tag="clone";
             TextMeshProUGUI[] texts;
             texts= newGo.GetComponentsInChildren<TextMeshProUGUI>();
-            texts[0].text= (item.Position.ToString())+1;
+            int place=(item.Position)+1;
+            texts[0].text= (place.ToString());
             if(item.DisplayName==null){texts[1].text="NULL";}
             else{texts[1].text= item.DisplayName;}
             texts[2].text= item.StatValue.ToString();
@@ -205,6 +208,12 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
         messageText.text="Password reset email sent";
     }
 
+    public void BackButton(){
+        LeaderboardMenu.SetActive(false);
+        Pausemenu.SetActive(true);
+        
+    }
+
 
 
 
@@ -230,6 +239,7 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
             passwordvisible.SetActive(true);
             usernameVisible.SetActive(false);
             LeaderboardMenu.SetActive(false);
+            Pausemenu.SetActive(true);
         }
             
     }

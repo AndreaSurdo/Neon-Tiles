@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public Light[] lights;
+    static Color32 red=new Color32(173,0,0,255);
+    static Color32 blue=new Color32(0,0,173,255);
+    static Color32 green=new Color32(0,176,0,255);
+    static Color32 yellow=new Color32(255,214,0,255);
+    static Color32 diprova=new Color32(0,217,197,255);
+    public static Color32[] colors= new Color32[] {red,blue,green,yellow};
     public string[] nextcolor= new string[] {"red","blue","green","yellow"};
     public static int highscore;
     public int highscoreBELLO=highscore;
@@ -61,12 +67,8 @@ public class GameManager : MonoBehaviour
        SpeedUp();
        timer += Time.deltaTime;
        if (timer >= 1f){
-        colorChanged=false;
-        if (timer >= 1.5f){
-            Time.timeScale = 1;
-            timer = 0; 
-            }           
-                  
+            colorChanged=false;
+            timer = 0;                  
         }
     }
 
@@ -88,7 +90,72 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ChangeGroundColor()
     {
-        before=LightBehaviour.l1.color;
+        //Material method
+        int randomcolor = Random.Range(0,4);
+        ground.GetComponent<Renderer>().material.color=colors[randomcolor];
+        before=ground.GetComponent<Renderer>().material.color;
+        after=before;
+        if(after==colors[0])
+        {
+            ground.tag="red";
+            currentLightColor="red";
+        }
+        else if(after==colors[1])
+        {
+            ground.tag="blue";
+            currentLightColor="blue";
+        }
+        else if(after==colors[2])
+        {
+            ground.tag="green";
+            currentLightColor="green";
+        }
+        else if(after==colors[3])
+        {
+            ground.tag="yellow";
+            currentLightColor="yellow";
+        }
+        while(true)
+        {   
+            before=after; 
+            randomcolor = Random.Range(0,4);
+            Debug.Log("Next color is:"+nextcolor[randomcolor]);    
+            float waitTime = Random.Range(5f,10f);
+            yield return new WaitForSeconds(waitTime);            
+            ground.GetComponent<Renderer>().material.color=colors[randomcolor];
+            after=ground.GetComponent<Renderer>().material.color;
+            if(after==colors[0])
+                {
+                    ground.tag="red";
+                    currentLightColor="red";
+                }
+                else if(after==colors[1])
+                {
+                    ground.tag="blue";
+                    currentLightColor="blue";
+                }
+                else if(after==colors[2])
+                {
+                    ground.tag="green";
+                    currentLightColor="green";
+                }
+                else if(after==colors[3])
+                {
+                    ground.tag="yellow";
+                    currentLightColor="yellow";
+                }
+            //colorChanged=true;
+            colorChanged=true;    
+            
+        }
+
+
+
+
+        //Lights method
+
+        
+        /*before=LightBehaviour.l1.color;
         //Debug.Log(LightBehaviour.randomcolor);
         int randomcolor = Random.Range(0,4);
         LightBehaviour.l1.color=Color.Lerp(before,LightBehaviour.colors[randomcolor],1);
@@ -151,7 +218,7 @@ public class GameManager : MonoBehaviour
             
             
             
-        }
+        }*/
     }
     
     /*public void PauseVisible(){
@@ -207,14 +274,14 @@ public class GameManager : MonoBehaviour
         if(Tile.isDead){
             Tile.isDead=false;
             score++;
-            UpdateHighScoreTextPlayFab();
+            UpdateHighScoreText();
             scoreText.text=score.ToString();
         }
                     
     }
 
     //works only without the global leaderboard
-   /* public void CheckHighScore()
+    public void CheckHighScore()
     {
         if(score>PlayerPrefs.GetInt("HighScore",0))
         {
@@ -226,13 +293,13 @@ public class GameManager : MonoBehaviour
     public void UpdateHighScoreText()
     {
         highScoreText.text=$"{PlayerPrefs.GetInt("HighScore",0)}"; 
-    }*/
+    }
 
-    public void UpdateHighScoreTextPlayFab(){
+    /*public void UpdateHighScoreTextPlayFab(){
         PlayfabManager instance2= gameObject.AddComponent<PlayfabManager>();
         instance2.GetHighScore(displayName);
         highScoreText.text=highscoreBELLO.ToString();
 
-    }
+    }*/
     
 }

@@ -89,7 +89,7 @@ public class Tile : MonoBehaviour
                 GameObject.Destroy(hit.transform.gameObject);          
                 }
 
-            else if(hit.transform.tag==ground.tag && hit.transform.gameObject != ground)
+            else if(hit.transform.tag==ground.tag && hit.transform.gameObject != ground && PauseMenu.gameispaused==false)
             {
                 //Debug.Log("Stesso colore");
                 //GameOverUI.SetActive(true);
@@ -113,7 +113,7 @@ public class Tile : MonoBehaviour
             Collider collider = gameObject.GetComponent<Collider>();      
             Destroy(collider);
         }
-        else if(other.gameObject.tag=="finishline" && gameObject.tag!=ground.tag)
+        else if(other.gameObject.tag=="finishline" && gameObject.tag!=ground.tag && distance<3)
         {
             PauseMenu.gameisover=true;
         }
