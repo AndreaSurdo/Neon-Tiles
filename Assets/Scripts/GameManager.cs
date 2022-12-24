@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public Light[] lights;
-    //public Color[] colors= new Color[] {Color.red,Color.blue,Color.green,Color.yellow};
+    public string[] nextcolor= new string[] {"red","blue","green","yellow"};
     public static int highscore;
     public int highscoreBELLO=highscore;
     public float distance;
@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
     {
         PauseMenu.gameisover=false;
         //UpdateHighScoreText();
-        PlayfabManager instance= gameObject.AddComponent<PlayfabManager>();
-        instance.GetDisplayName();
+        /*PlayfabManager instance= gameObject.AddComponent<PlayfabManager>();
+        instance.GetDisplayName();*/
         GameStart(); 
     }  
 
@@ -115,10 +115,11 @@ public class GameManager : MonoBehaviour
         }
         while(true)
         {   
-            before=after;     
-            float waitTime = Random.Range(5f,10f);
-            yield return new WaitForSeconds(waitTime);  
+            before=after; 
             randomcolor = Random.Range(0,4);
+            Debug.Log("Next color is:"+nextcolor[randomcolor]);    
+            float waitTime = Random.Range(5f,10f);
+            yield return new WaitForSeconds(waitTime);            
             LightBehaviour.l1.color=Color.Lerp(before,LightBehaviour.colors[randomcolor],1);
             after=LightBehaviour.l1.color;   
             if(after==LightBehaviour.colors[0])

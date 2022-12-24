@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class LightBehaviour : MonoBehaviour
 {
-    public static Color purple= new Color(255,0,247,255);
-    public static Color[] colors= new Color[] {Color.magenta,Color.blue,Color.green,Color.yellow};
+    public static Color purple= new Color(255,0,247,1.0f);
+    public static Color[] colors= new Color[] {Color.red,Color.blue,Color.green,Color.yellow};
     public static Light l1;
     public static int randomcolor;
     // Start is called before the first frame update

@@ -112,20 +112,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -6
-  Original: {fileID: 2100000, guid: 88cb1b8e2a7e98d4282529c525adf8c4, type: 2}
-  CurrentMaterial: {fileID: 0}
   ground: {fileID: 0}
-  redmat: {fileID: 2100000, guid: b0d798bbcf080db4b9046bcb0d9023c1, type: 2}
+  redmat: {fileID: 2100000, guid: ffd4ff80706dbf9499da9ccfcce8b2cd, type: 2}
   greenmat: {fileID: 2100000, guid: adfe251356832e347a11255a437187fe, type: 2}
   yellowmat: {fileID: 2100000, guid: fc8f011bec48cd34d978ad12cee1c6db, type: 2}
   bluemat: {fileID: 2100000, guid: e1ae14eb46cd85843944cdf430955503, type: 2}
-  materialTags:
-  - red
-  - green
-  - yellow
-  - blue
   finishLine: {fileID: 0}
-  getSlow: 0
 --- !u!54 &-3203295373154311529
 Rigidbody:
   m_ObjectHideFlags: 0
