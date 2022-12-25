@@ -113,7 +113,7 @@ public class Tile : MonoBehaviour
             Collider collider = gameObject.GetComponent<Collider>();      
             Destroy(collider);
         }
-        else if(other.gameObject.tag=="finishline" && gameObject.tag!=ground.tag && distance<3)
+        else if(other.gameObject.tag=="finishline" && gameObject.tag!=ground.tag)
         {
             PauseMenu.gameisover=true;
         }

@@ -26,6 +26,8 @@ public class PlayfabManager : MonoBehaviour
     public Transform rowsParent;
     public GameObject LeaderboardMenu;
     public GameObject Pausemenu;
+    public GameObject GameoverMenu;
+
 
 
 
@@ -210,8 +212,7 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
 
     public void BackButton(){
         LeaderboardMenu.SetActive(false);
-        Pausemenu.SetActive(true);
-        
+        if(PauseMenu.gameispaused==true){Pausemenu.SetActive(true);}
     }
 
 
