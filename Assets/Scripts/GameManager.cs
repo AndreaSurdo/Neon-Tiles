@@ -17,8 +17,10 @@ public class GameManager : MonoBehaviour
     public static float score=0;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI NextColorIs;
+    public TextMeshProUGUI ActualColorName;
     public Light[] lights;
-    static Color32 red=new Color32(173,0,0,255);
+    static Color32 red=new Color32(180,0,0,255);
     static Color32 blue=new Color32(0,0,173,255);
     static Color32 green=new Color32(0,176,0,255);
     static Color32 yellow=new Color32(255,214,0,255);
@@ -81,7 +83,8 @@ public class GameManager : MonoBehaviour
             if(score<10){waitTime = Random.Range(0.5f,0.75f);}
             else if(score<25){waitTime = Random.Range(0.4f,0.65f);}
             else if(score<50){waitTime = Random.Range(0.3f,0.5f);}
-            else{waitTime = Random.Range(0.25f,0.4f);}
+            else if(score<75){waitTime = Random.Range(0.25f,0.4f);}
+            else{waitTime = Random.Range(0.15f,0.25f);}
             yield return new WaitForSeconds(waitTime);
             randTile = Random.Range(0,4);            
             Instantiate(tile, spawnPoints[randTile].position, Quaternion.identity);
@@ -119,7 +122,13 @@ public class GameManager : MonoBehaviour
         {   
             before=after; 
             randomcolor = Random.Range(0,4);
-            Debug.Log("Next color is:"+nextcolor[randomcolor]);    
+            Debug.Log("Next color is:"+nextcolor[randomcolor]); 
+            ActualColorName.text=nextcolor[randomcolor].ToUpper();
+            if(nextcolor[randomcolor]=="red"){ActualColorName.color=Color.red;}
+            else if(nextcolor[randomcolor]=="blue"){ActualColorName.color=Color.blue;} 
+            else if(nextcolor[randomcolor]=="green"){ActualColorName.color=Color.green;} 
+            else if(nextcolor[randomcolor]=="yellow"){ActualColorName.color=Color.yellow;}  
+            NextColorIs.text="Next color is: ";
             float waitTime = Random.Range(5f,10f);
             yield return new WaitForSeconds(waitTime);            
             ground.GetComponent<Renderer>().material.color=colors[randomcolor];
@@ -251,12 +260,15 @@ public class GameManager : MonoBehaviour
                         multiplier=2.5f;
                         if(score>=75){
                             multiplier=3f;
+                            if(score>=100){
+                                multiplier=3.5f;
                         }
                      }
                 }
         
              }
 
+    }
     }
 
        public void SlowDownTime()

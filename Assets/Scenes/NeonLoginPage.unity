@@ -1791,6 +1791,8 @@ MonoBehaviour:
   rowPrefab: {fileID: 0}
   rowsParent: {fileID: 0}
   LeaderboardMenu: {fileID: 0}
+  Pausemenu: {fileID: 0}
+  GameoverMenu: {fileID: 0}
 --- !u!1 &935701352
 GameObject:
   m_ObjectHideFlags: 0
