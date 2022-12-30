@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     public static Color32[] colors= new Color32[] {red,blue,green,yellow};
     public string[] nextcolor= new string[] {"red","blue","green","yellow"};
     public static int highscore;
-    public int highscoreBELLO=highscore;
     public float distance;
     public static bool colorChanged=false;
     public float timer = 0;
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour
     public static Color before;
     public static Color after;
     public static string currentLightColor;
+    public GameObject NextColorButton;
     public void DistanceCalculator(){
         distance = Vector3.Distance(tile.transform.position, finishLine.transform.position);
         Debug.Log("Distance between objects: " + distance);
@@ -122,7 +122,6 @@ public class GameManager : MonoBehaviour
         {   
             before=after; 
             randomcolor = Random.Range(0,4);
-            Debug.Log("Next color is:"+nextcolor[randomcolor]); 
             ActualColorName.text=nextcolor[randomcolor].ToUpper();
             if(nextcolor[randomcolor]=="red"){ActualColorName.color=Color.red;}
             else if(nextcolor[randomcolor]=="blue"){ActualColorName.color=Color.blue;} 
@@ -130,7 +129,11 @@ public class GameManager : MonoBehaviour
             else if(nextcolor[randomcolor]=="yellow"){ActualColorName.color=Color.yellow;}  
             NextColorIs.text="Next color is: ";
             float waitTime = Random.Range(5f,10f);
-            yield return new WaitForSeconds(waitTime);            
+            yield return new WaitForSeconds(waitTime-3);
+            NextColorAnimation animatorController = NextColorButton.GetComponent<NextColorAnimation>();
+            animatorController.SlideIn();
+            yield return new WaitForSeconds(3);
+            animatorController.SlideOut();
             ground.GetComponent<Renderer>().material.color=colors[randomcolor];
             after=ground.GetComponent<Renderer>().material.color;
             if(after==colors[0])
