@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public float timer = 0;
     public float waitTime;
     public static string displayName;
+    public AudioSource Hitmark;
     
     //public GameObject playButton;
     //public Button pauseButton;
@@ -288,6 +289,7 @@ public class GameManager : MonoBehaviour
     public void ScoreUp()
     {
         if(Tile.isDead){
+            Hitmark.Play();
             Tile.isDead=false;
             score++;
             UpdateHighScoreText();

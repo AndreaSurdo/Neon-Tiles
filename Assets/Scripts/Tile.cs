@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     public GameObject finishLine;
     int pick;
     public static bool canBeImmortal=true;
+    public AudioSource DeathSound;
 
 
     // Start is called before the first frame update
@@ -94,6 +95,7 @@ public class Tile : MonoBehaviour
                 //Debug.Log("Stesso colore");
                 //GameOverUI.SetActive(true);
                 //PauseButton.SetActive(false);
+                DeathSound.Play();
                 PauseMenu.gameisover=true;
             }
 
@@ -115,6 +117,7 @@ public class Tile : MonoBehaviour
         }
         else if(other.gameObject.tag=="finishline" && gameObject.tag!=ground.tag)
         {
+            DeathSound.Play();
             PauseMenu.gameisover=true;
         }
     }

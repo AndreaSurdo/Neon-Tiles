@@ -15,20 +15,24 @@ public class PauseMenu : MonoBehaviour
     public GameObject GameOverUI;
     public GameObject PauseButton;
     public GameObject LeaderboardMenu;
+    public AudioSource PauseSound;
+    public AudioSource ButtonClick;
 
     
     public void Resume()
     {
-       PauseUI.SetActive(false);
-       PauseButton.SetActive(true);
-       LeaderboardMenu.SetActive(false);
-       Time.timeScale=1;
-       gameispaused=false;
+        ButtonClick.Play();
+        PauseUI.SetActive(false);
+        PauseButton.SetActive(true);
+        LeaderboardMenu.SetActive(false);
+        Time.timeScale=1;
+        gameispaused=false;
         
     }
 
     public void Replay()
     {
+        ButtonClick.Play();
         GameOverUI.SetActive(false);
         PauseButton.SetActive(true);
         Time.timeScale=1;
@@ -40,6 +44,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        PauseSound.Play();
         PauseUI.SetActive(true);
         PauseButton.SetActive(false);
         Time.timeScale=0;
@@ -54,6 +59,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
+        ButtonClick.Play();
         Application.Quit();
         Debug.Log("Quit");
     }

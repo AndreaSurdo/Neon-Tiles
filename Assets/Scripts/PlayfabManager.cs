@@ -27,6 +27,7 @@ public class PlayfabManager : MonoBehaviour
     public GameObject LeaderboardMenu;
     public GameObject Pausemenu;
     public GameObject GameoverMenu;
+    public AudioSource ButtonClick;
 
 
 
@@ -49,6 +50,7 @@ public class PlayfabManager : MonoBehaviour
 
     //Leaderboard request for 5 elements
     public void GetLeaderboard(){
+        ButtonClick.Play();
         LeaderboardMenu.SetActive(true);
         Pausemenu.SetActive(false);
         var request= new GetLeaderboardRequest{StatisticName="Neon-Tiles-Leaderboard", StartPosition=0, MaxResultsCount=5};
