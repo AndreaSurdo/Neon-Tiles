@@ -122,16 +122,17 @@ public class GameManager : MonoBehaviour
         {   
             before=after; 
             randomcolor = Random.Range(0,4);
+            
+            float waitTime = Random.Range(5f,10f);
+            yield return new WaitForSeconds(waitTime-3);
+            NextColorAnimation animatorController = NextColorButton.GetComponent<NextColorAnimation>();
+            animatorController.SlideIn();
             ActualColorName.text=nextcolor[randomcolor].ToUpper();
             if(nextcolor[randomcolor]=="red"){ActualColorName.color=Color.red;}
             else if(nextcolor[randomcolor]=="blue"){ActualColorName.color=Color.blue;} 
             else if(nextcolor[randomcolor]=="green"){ActualColorName.color=Color.green;} 
             else if(nextcolor[randomcolor]=="yellow"){ActualColorName.color=Color.yellow;}  
             NextColorIs.text="Next color is: ";
-            float waitTime = Random.Range(5f,10f);
-            yield return new WaitForSeconds(waitTime-3);
-            NextColorAnimation animatorController = NextColorButton.GetComponent<NextColorAnimation>();
-            animatorController.SlideIn();
             yield return new WaitForSeconds(3);
             animatorController.SlideOut();
             ground.GetComponent<Renderer>().material.color=colors[randomcolor];
