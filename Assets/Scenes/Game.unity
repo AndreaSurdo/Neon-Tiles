@@ -4732,7 +4732,7 @@ MonoBehaviour:
   LeaderboardMenu: {fileID: 807903835}
   Pausemenu: {fileID: 464669819}
   GameoverMenu: {fileID: 104557174}
-  ButtonClick: {fileID: 0}
+  ButtonClick: {fileID: 1759843598}
 --- !u!82 &1759843598
 AudioSource:
   m_ObjectHideFlags: 0
