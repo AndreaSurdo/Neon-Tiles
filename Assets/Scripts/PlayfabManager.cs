@@ -28,6 +28,7 @@ public class PlayfabManager : MonoBehaviour
     public GameObject Pausemenu;
     public GameObject GameoverMenu;
     public AudioSource ButtonClick;
+    public AudioSource ButtonClick2;
 
 
 
@@ -213,6 +214,7 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
     }
 
     public void BackButton(){
+        ButtonClick2.Play();
         LeaderboardMenu.SetActive(false);
         if(PauseMenu.gameispaused==true){Pausemenu.SetActive(true);}
     }

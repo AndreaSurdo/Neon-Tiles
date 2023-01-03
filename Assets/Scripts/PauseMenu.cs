@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour
         SettingsUI.SetActive(false);
         PauseUI.SetActive(true);
         PauseButton.SetActive(false);
+
     }
 
     public void Replay()
