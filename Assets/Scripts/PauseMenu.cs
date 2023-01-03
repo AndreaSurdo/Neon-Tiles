@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameisover=false;
     public GameObject PauseUI;
     public GameObject GameOverUI;
+    public GameObject SettingsUI;
     public GameObject PauseButton;
     public GameObject LeaderboardMenu;
     public AudioSource PauseSound;
@@ -29,6 +30,30 @@ public class PauseMenu : MonoBehaviour
         gameispaused=false;
         
     }
+    public void Pause()
+    {
+        PauseSound.Play();
+        PauseUI.SetActive(true);
+        PauseButton.SetActive(false);
+        Time.timeScale=0;
+        gameispaused=true;
+    }
+
+    public void Settings()
+    {
+        ButtonClick.Play();
+        PauseUI.SetActive(false);
+        PauseButton.SetActive(true);
+        SettingsUI.SetActive(true);
+    }
+
+    public void BackSettings()
+    {
+        ButtonClick.Play();
+        SettingsUI.SetActive(false);
+        PauseUI.SetActive(true);
+        PauseButton.SetActive(false);
+    }
 
     public void Replay()
     {
@@ -42,14 +67,7 @@ public class PauseMenu : MonoBehaviour
         GameManager.multiplier=1;
     }
 
-    public void Pause()
-    {
-        PauseSound.Play();
-        PauseUI.SetActive(true);
-        PauseButton.SetActive(false);
-        Time.timeScale=0;
-        gameispaused=true;
-    }
+    
 
     public void LoadMenu()
     {
