@@ -11,6 +11,7 @@ TagManager:
   - yellow
   - green
   - clone
+  - GameMusic
   layers:
   - Default
   - TransparentFX
