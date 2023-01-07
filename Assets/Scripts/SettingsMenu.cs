@@ -96,18 +96,18 @@ public class SettingsMenu : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        float SfxisActive=PlayerPrefs.GetFloat("ActiveSfx", 1);
-        if(SfxisActive==1){TurnSfxOn();}
+    {        
         float MusicisActive=PlayerPrefs.GetFloat("ActiveMusic", 1);
         if(MusicisActive==1){TurnMusicOn(); Music.Play();}
         else{TurnMusicOff(); Music.Pause();}
-        
+        float SfxisActive=PlayerPrefs.GetFloat("ActiveSfx", 1);
+        if(SfxisActive==1){TurnSfxOn();}      
         
         
         if(SceneManager.GetActiveScene().name=="NeonLoginPage")
         {
-           AudioListener.volume=PlayerPrefs.GetFloat("VolumeValue", 1f);
+            if(MusicisActive==0){AudioListener.volume=0;Debug.Log("silent music");}
+            else{AudioListener.volume=PlayerPrefs.GetFloat("VolumeValue", 1f);}
         }
         else{LoadVolume();}
         

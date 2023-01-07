@@ -66,12 +66,25 @@ public class GameManager : MonoBehaviour
     void Update()
     {  
        //DistanceCalculator();
-       ScoreUp();
+       float gameMode=PlayerPrefs.GetFloat("NormalMode",0);
+       if(gameMode==0){ScoreUp(); Debug.Log("normal");}
+       else if(gameMode==1){ScoreUpHidden();Debug.Log("hidden");}      
        SpeedUp();
        timer += Time.deltaTime;
        if (timer >= 1f){
             colorChanged=false;
             timer = 0;                  
+        }
+    }
+
+    public void ScoreUpHidden()
+    {
+        if(Tile.isDead){
+            Hitmark.Play();
+            Tile.isDead=false;
+            score+=2;
+            UpdateHighScoreText();
+            scoreText.text=score.ToString();
         }
     }
 
