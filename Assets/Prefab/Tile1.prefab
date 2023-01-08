@@ -118,6 +118,7 @@ MonoBehaviour:
   greenmat: {fileID: 2100000, guid: adfe251356832e347a11255a437187fe, type: 2}
   yellowmat: {fileID: 2100000, guid: fc8f011bec48cd34d978ad12cee1c6db, type: 2}
   bluemat: {fileID: 2100000, guid: e1ae14eb46cd85843944cdf430955503, type: 2}
+  greymat: {fileID: 2100000, guid: 1d156b71dbb20ad42ae7b36e15e57467, type: 2}
   finishLine: {fileID: 0}
   DeathSound: {fileID: -136752437856152194}
 --- !u!54 &-3203295373154311529

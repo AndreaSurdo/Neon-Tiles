@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
     public Material greenmat;
     public Material yellowmat;
     public Material bluemat;
+    public Material greymat;
     public static bool isDead=false;
     public static float distance;
     public GameObject finishLine;
@@ -64,6 +65,15 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        float gameMode=PlayerPrefs.GetFloat("NormalMode",0);
+        if(gameMode==1)
+        {
+            DistanceCalculator();
+            if(distance<12)
+            {
+                GetComponent<Renderer>().material = greymat;
+            }
+        }
         DistanceCalculator();
         if(distance<3)
         {

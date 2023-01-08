@@ -18,7 +18,17 @@ public class PauseMenu : MonoBehaviour
     public GameObject LeaderboardMenu;
     public AudioSource PauseSound;
     public AudioSource ButtonClick;
+    public GameObject HowToButton;
+    public GameObject backButton;
+    public GameObject howToScreen;
 
+
+    public void HowToPlay()
+    {
+        HowToButton.SetActive(false);
+        PauseUI.SetActive(false);
+        howToScreen.SetActive(true);
+    }
     
     public void Resume()
     {
@@ -43,7 +53,6 @@ public class PauseMenu : MonoBehaviour
     {
         ButtonClick.Play();
         PauseUI.SetActive(false);
-        PauseButton.SetActive(true);
         SettingsUI.SetActive(true);
     }
 

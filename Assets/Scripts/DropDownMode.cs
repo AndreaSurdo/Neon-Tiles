@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DropDownMode : MonoBehaviour
 {
     TMPro.TMP_Dropdown dropdownMenu;
+    
 
     public void ModeSelector(int index)
     {
@@ -23,10 +25,12 @@ public class DropDownMode : MonoBehaviour
         if(gameMode==0)
         {
             dropdownMenu.value=0;
+            
         }
         else if(gameMode==1)
         {
             dropdownMenu.value=1;
+            
         }
 
     }

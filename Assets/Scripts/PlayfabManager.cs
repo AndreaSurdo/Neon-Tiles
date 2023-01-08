@@ -18,6 +18,7 @@ public class PlayfabManager : MonoBehaviour
     public GameObject usernameVisible;
     public GameObject passwordvisible;
     public GameObject Login;
+    public GameObject HowToPlay;
     public GameObject RegisterLink;
     public GameObject RegisterTrue;
     public GameObject ResetLink;
@@ -26,10 +27,25 @@ public class PlayfabManager : MonoBehaviour
     public Transform rowsParent;
     public GameObject LeaderboardMenu;
     public GameObject Pausemenu;
+    public GameObject Back;
     public GameObject GameoverMenu;
     public AudioSource ButtonClick;
     public AudioSource ButtonClick2;
 
+
+    public void LoginBackButton()
+    {
+            Back.SetActive(false);
+            Login.SetActive(true);
+            RegisterLink.SetActive(true);
+            ResetLink.SetActive(true);
+            RegisterTrue.SetActive(false);
+            ResetTrue.SetActive(false);
+            passwordvisible.SetActive(true);
+            usernameVisible.SetActive(false);
+            LeaderboardMenu.SetActive(false);
+            Pausemenu.SetActive(true);
+    }
 
 
 
@@ -143,6 +159,7 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
 
     public void RegisterLinkMethod()
     {
+        Back.SetActive(true);
         Login.SetActive(false);
         RegisterLink.SetActive(false);
         ResetLink.SetActive(false);
@@ -152,6 +169,7 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
 
     public void ResetLinkMethod()
     {
+        Back.SetActive(true);
         Login.SetActive(false);
         RegisterLink.SetActive(false);
         ResetLink.SetActive(false);
@@ -216,7 +234,7 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
     public void BackButton(){
         ButtonClick2.Play();
         LeaderboardMenu.SetActive(false);
-        if(PauseMenu.gameispaused==true){Pausemenu.SetActive(true);}
+        if(PauseMenu.gameispaused==true){Pausemenu.SetActive(true); HowToPlay.SetActive(true);}
     }
 
 
@@ -234,8 +252,9 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(SceneManager.GetActiveScene().name=="NeonLoginPage")
         {
+            if(Input.GetKeyDown(KeyCode.Escape)){        
             Login.SetActive(true);
             RegisterLink.SetActive(true);
             ResetLink.SetActive(true);
@@ -248,4 +267,5 @@ public void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
         }
             
     }
+        }
 }

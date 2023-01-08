@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public float waitTime;
     public static string displayName;
     public AudioSource Hitmark;
+    public TextMeshProUGUI modeInitials;
     
     //public GameObject playButton;
     //public Button pauseButton;
@@ -67,8 +68,8 @@ public class GameManager : MonoBehaviour
     {  
        //DistanceCalculator();
        float gameMode=PlayerPrefs.GetFloat("NormalMode",0);
-       if(gameMode==0){ScoreUp(); Debug.Log("normal");}
-       else if(gameMode==1){ScoreUpHidden();Debug.Log("hidden");}      
+       if(gameMode==0){ScoreUp(); modeInitials.text="NL";}
+       else if(gameMode==1){ScoreUpHidden(); modeInitials.text="HD";}      
        SpeedUp();
        timer += Time.deltaTime;
        if (timer >= 1f){

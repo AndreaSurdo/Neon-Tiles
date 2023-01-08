@@ -74,12 +74,13 @@ public class SettingsMenu : MonoBehaviour
     }
     public void TurnMusicOn()
     {
+        float MusicisActive=PlayerPrefs.GetFloat("ActiveMusic", 1);
         MusicOn.SetActive(true);
         MusicOff.SetActive(false);
-        BGMusic=GameObject.Find("Backgroung Music");
-        PlayerPrefs.SetFloat("ActiveMusic", 1);
+        BGMusic=GameObject.Find("Backgroung Music");        
         Music=BGMusic.GetComponent<AudioSource>();
-        Music.Play();
+        if(MusicisActive==0){ Music.Play();}
+        PlayerPrefs.SetFloat("ActiveMusic", 1);
     }
 
     public void LoadVolume(){
@@ -98,8 +99,8 @@ public class SettingsMenu : MonoBehaviour
     void Start()
     {        
         float MusicisActive=PlayerPrefs.GetFloat("ActiveMusic", 1);
-        if(MusicisActive==1){TurnMusicOn(); Music.Play();}
-        else{TurnMusicOff(); Music.Pause();}
+        if(MusicisActive==1){TurnMusicOn();}
+        else{TurnMusicOff();}
         float SfxisActive=PlayerPrefs.GetFloat("ActiveSfx", 1);
         if(SfxisActive==1){TurnSfxOn();}      
         
