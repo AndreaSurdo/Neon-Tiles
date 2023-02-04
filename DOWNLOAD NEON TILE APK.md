@@ -1,5 +1,5 @@
 # Neon-Tiles
-Newest project repository
+
 
 Essendo il file apk più pesante dei 25MB consentiti per l'upload, è NECESSARIO scaricare il file dal seguente link Drive:
 
