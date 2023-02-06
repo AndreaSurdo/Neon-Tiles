@@ -74,6 +74,7 @@ public class Tile : MonoBehaviour
                 GetComponent<Renderer>().material = greymat;
             }
         }
+        //If the tile is near the bottom of the screen and the ground color changes, it lets the player survive
         DistanceCalculator();
         if(distance<3)
         {
